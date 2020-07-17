@@ -1,0 +1,20 @@
+show coords ingame
+gamerule showcoordinates true
+
+# tickarea for command blocks
+# 385 90 58
+tickingarea add circle 385 90 58 4 spawn_blocks
+tickingarea add 126 4 -251 122 4 -244 command_centregit fetch upstream
+
+
+invisibility 99999 255 true
+
+
+
+/fill ~-21 ~-2 ~-21 ~21 ~4 ~21 bedrock 0 hollow  ### will erase all content inside
+/fill ~-22 ~-2 ~-22 ~22 ~5 ~22 bedrock 0 outline  ### this should leave the content intact
+
+/fill ~-20 ~-1 ~-20 ~20 ~-1 ~20 sealantern
+
+/fill ~-20 ~3 ~-20 ~20 ~3 ~20 glass
+/fill ~-20 ~4 ~-20 ~20 ~4 ~20 quartz_block 3

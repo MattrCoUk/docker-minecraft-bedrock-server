@@ -3,8 +3,39 @@ security unlock-keychain
 
 
 ## create external volume (worlds, users data etc.)
-docker volume create --opt device=[path] --opt o=bind bds --opt type=none
+docker volume create --opt device=/Users/Aretha/minecraft/EmerLand_data --opt o=bind bds1_vol --opt type=none
 
+## create network
+
+# DHCP range: 192.168.0.11-254
+20, 21 - perm devices ps4 etc.
+200.. - Aretha, Dolores
+
+docker
+192.168.0.224/28
+(192.168.0.224 - 192.168.0.239)
+
+
+docker network create -d macvlan -o parent=eth0 \
+  --subnet 192.168.0.0/24 \
+  --gateway 192.168.0.1 \
+  --ip-range 192.168.0.224/28 \
+  --aux-address 'host=192.168.0.239' \
+  bds_net
+
+
+created vlan  // with GUI
+# then
+ifconfig vlan0 192.168.0.239/32
+
+
+##
+
+# ifconfig vlan0 up  // should be up already
+
+
+route -n add 192.168.0.224/28 192.168.0.1
+# NOT PERSISTENT !
 
 
 ## create and start containers
@@ -38,3 +69,14 @@ docker-compose up -d --no-deps <service_name>
 
 # if changes were made
 docker-compose up -d --no-deps --build <service_name>
+
+
+# view log
+docker logs emer
+docker logs --follow emer
+docker logs --tail 300 emer  #last 300 lines only
+
+
+#
+# remove all chache build etc
+docker system prune -a
